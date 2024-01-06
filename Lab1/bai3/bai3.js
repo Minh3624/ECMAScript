@@ -1,45 +1,38 @@
-fetch('https://datausa.io/api/data?drilldowns=Nation&measures=Population')
+fetch('https://api.publicapis.org/entries')
     .then(function (response) {
         response.json().then(function (data) {
             let api = '';
             console.log(data);
-            const apiData = data.data;
-            for (let i = 0; i < apiData.length; i++) {
+            const apiData = data.entries;
+            for (let i = 0; i < 10; i++) {
                 api += `
-                <tr>
-                <td>${apiData[i]["ID Nation"]}</td>
-                <td>${apiData[i].Nation}</td>
-                <td>${apiData[i]["ID Year"]}</td>
-                <td>${apiData[i].Year}</td>
-                <td>${apiData[i].Population}</td>
-                </tr>
-                `;
+            <tr>
+                <td>${i + 1}</td>
+                <td>${apiData[i].API}</td>
+                <td>${apiData[i].Auth}</td>
+                <td>${apiData[i].Cors}</td>
+                <td>${apiData[i].Category}</td>
+                <td>${apiData[i].Description}</td>
+                <td>${apiData[i].HTTPS}</td>
+                <td>${apiData[i].Link}</td>
+            </tr>
+        `;
             }
             document.getElementById('tableBody').innerHTML = api;
-            // const outputElement = document.getElementById("output");
-            // if (data && data.data && data.data.length > 0) {
-            //     // Lấy phần tử tbody để thêm dữ liệu vào
-            //     const tableBodyElement = document.getElementById("tableBody");
-            //     // Duyệt qua từng phần tử trong mảng và thêm vào tbody
-            //     data.data.forEach(function (item, index) {
-            //         const row = tableBodyElement.insertRow();
-            //         const Index = row.insertCell(0);
-            //         Index.innerHTML = index + 1;
-            //         const Nationality = row.insertCell(1);
-            //         Nationality.innerHTML = item.Nation;
-            //         const Year = row.insertCell(2);
-            //         Year.innerHTML = item.Year;
-            //         const Population = row.insertCell(3);
-            //         Population.innerHTML = item.Population;
-            //     });
-            // } else {
-            //     console.log('Không có dữ liệu hoặc mảng dữ liệu trống.');
-            // }
-        });
+        })
     })
     .catch(function (error) {
-        console.log(error);
-    })
-// const response = document.querySelector(".myclass").then(function (response) { });
+        console.error('Fetch error:', error);
+    });
 
-// document.getElementById('id').then(function (response) { });  
+var name1 = "Mạnh";
+var tuoi = 21;
+var sayHello1 = function () {
+    console.log(`Ten tui la ${name1}. tuoi tui la ${tuoi}`);
+}
+var displayData = function (data) {
+    var outputElement = document.getElementById("output");
+    outputElement.innerHTML = data;
+}
+sayHello1();
+sayHello1(name1 = "Minh", tuoi = 19); 
